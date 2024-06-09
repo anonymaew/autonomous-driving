@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 import torch
 import torch.nn as nn
-from lib.resnet_model_1 import Network
+from lib.resnet_model_levi_1 import Network
 from lib.dataset import unnormalize, resnet_transforms
 from lib.model import ResNet, ViTNet
 

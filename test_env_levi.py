@@ -24,7 +24,7 @@ import torch
 import torch.nn as nn
 
 from lib.dataset import resnet_transforms, unnormalize
-from lib.resnet_model_1 import Network
+from lib.resnet_model_levi_1 import Network
 
 try:
     sys.path.append(glob.glob('./carla/dist/carla-*%d.%d-%s.egg' % (
@@ -60,7 +60,7 @@ class CarEnv:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = Network(dropout_prob=0.5)
         self.model.feature_extractor[0] = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False)
-        self.model.load_state_dict(torch.load('resnet1.pth', map_location=torch.device('cpu')))
+        self.model.load_state_dict(torch.load('resnet_levi_1.pth', map_location=torch.device('cpu')))
         self.model = self.model.to(self.device)
         self.model.eval()
         self.vehicle = None
@@ -202,7 +202,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = Network(dropout_prob=0.5)
     model.feature_extractor[0] = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False)
-    model.load_state_dict(torch.load('./resnet1.pth', map_location=device))
+    model.load_state_dict(torch.load('resnet_levi_1.pth', map_location=device))
     model = model.to(device)
     model.eval()
     next_image, _, _ = env.step(1)
